@@ -133,7 +133,7 @@ function montar(jogo, m) {
 
   // Amigos
   R.thama = npc(m, "thama", px(16.2), px(22.8), { dir: "cima", interacao: conversa("Conversar", thamaAcao) });
-  R.samuel = npc(m, "samuel", px(31.6), px(15.6), { dir: "esq", gesticula: true, interacao: conversa("Conversar", samuelAcao) });
+  R.samuel = npc(m, "samuel", px(21.6), px(23), { dir: "cima", gesticula: true, interacao: conversa("Conversar", samuelAcao) });
 
   // A marca da maca no chão, onde o homem ficou deitado (luz negra).
   marca(m, desenharSimbolo("maca"), px(11.2), px(17.2) - 3, {
@@ -142,8 +142,7 @@ function montar(jogo, m) {
       await j.falar(D.achouMaca);
       j.simbolo("maca", "Maca · levanta e anda");
       await j.esperar(0.8);
-      R.thama.olharPara(j.jogador.x, j.jogador.y);
-      await j.falar(D.thamaFim);
+      await cenaSamuelVolta(j);
       j.objetivo(objetivoAtual(j));
     },
   });
@@ -171,6 +170,9 @@ async function aoEntrar(jogo) {
   await jogo.falar(D.intro);
   R.thama.olharPara(jogo.jogador.x, jogo.jogador.y);
   await jogo.falar(D.thama);
+  R.samuel.olharPara(jogo.jogador.x, jogo.jogador.y);
+  R.samuel.gesticular(1.2);
+  await jogo.falar(D.samuel);
   jogo.objetivo(objetivoAtual(jogo));
 }
 
@@ -247,6 +249,18 @@ async function cenaCura(jogo) {
   curado.visivel = false;
   perguntador.parado = false;
   perguntador.dirPadrao = "baixo";
+
+  // O Samuel vai atrás dele.
+  const { samuel } = R;
+  jogo.focar(px(14.6), px(20.4));
+  samuel.parado = true;
+  await samuel.seguirCaminho([[px(17.6), px(21.2)], [px(15.2), px(20.6)]], 70);
+  samuel.olharPara(j.x, j.y);
+  samuel.gesticular(1.4);
+  await jogo.falar(D.samuelVai);
+  await samuel.seguirCaminho([[px(17.6), px(21.2)], [px(19.6), px(23.6)], [px(19.6), px(25.8)]], 76);
+  samuel.visivel = false;
+  jogo.flag("bet.samuelSaiu", true);
   jogo.focar(null);
   jogo.flag("bet.curado", true);
   R.thama.olharPara(j.x, j.y);
@@ -261,6 +275,30 @@ async function cenaCura(jogo) {
   jogo.objetivo(objetivoAtual(jogo));
 }
 
+// O Samuel volta do templo com o fim da história (João 5:14–15).
+async function cenaSamuelVolta(jogo) {
+  const { samuel, thama } = R;
+  const j = jogo.jogador;
+  samuel.x = px(19.6);
+  samuel.y = px(25.8);
+  samuel.visivel = true;
+  samuel.parado = true;
+  jogo.focar(px(15), px(21));
+  await samuel.seguirCaminho([[px(19.6), px(23.4)], [px(15.8), px(21.4)], [px(13.8), px(20.4)]], 80);
+  samuel.olharPara(j.x, j.y);
+  j.olharPara(samuel.x, samuel.y);
+  thama.olharPara(samuel.x, samuel.y);
+  samuel.gesticular(2);
+  await jogo.falar(D.samuelVolta.slice(0, 1));
+  await jogo.falar(D.samuelVolta.slice(1, 2));
+  jogo.pista("descobriu", PISTAS.descobriu, "Jerusalém");
+  samuel.gesticular(1.6);
+  await jogo.falar(D.samuelVolta.slice(2));
+  samuel.parado = false;
+  samuel.dirPadrao = "baixo";
+  jogo.focar(null);
+}
+
 async function thamaAcao(jogo) {
   if (!jogo.flag("bet.curado")) return jogo.falar(D.thamaAntes);
   if (!jogo.estado.simbolos.includes("maca")) return jogo.falar(D.thamaMaca);
@@ -269,8 +307,7 @@ async function thamaAcao(jogo) {
 
 async function samuelAcao(jogo) {
   if (jogo.estado.simbolos.includes("maca")) return jogo.falar(D.samuelFim);
-  if (jogo.flag("bet.curado")) return jogo.falar(D.samuelDepois);
-  return jogo.falar(D.samuel);
+  return jogo.falar(D.samuelAntes);
 }
 
 async function sair(jogo) {

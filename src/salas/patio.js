@@ -115,6 +115,10 @@ async function fecharCaso(jogo) {
   jogo.tensaoExtra = 0.3;
   await animar(2.2, (k) => (R.brilhoPergunta = suave(k)));
   await jogo.esperar(1);
+  // O Samuel conta por que os relatos foram escritos.
+  const samuel = R.equipe.samuel;
+  samuel.olharPara(j.x, j.y);
+  samuel.gesticular(1.8);
   await jogo.falar(D.autor);
   R.equipe.debora.olharPara(j.x, j.y);
   await jogo.falar(D.final);

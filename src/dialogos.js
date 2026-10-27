@@ -232,11 +232,21 @@ export const DIALOGOS = {
     ],
     thamaFim: [{ quem: "thama", texto: "A equipe está esperando a gente no pátio. Vamos fechar esse caso?" }],
     samuel: [
-      { quem: "samuel", texto: "E aí, eu sou o Samuel! Cheguei antes para ver o lugar." },
-      { quem: "samuel", texto: "Um monte de gente esperando... e ninguém ajuda ninguém." },
+      { quem: "samuel", texto: "E eu sou o Samuel! Cheguei antes para ver o lugar." },
+      { quem: "samuel", texto: "Repara: um monte de gente esperando... e ninguém ajuda ninguém." },
     ],
-    samuelDepois: [{ quem: "samuel", texto: "Viu só? Curado, e nem sabe por quem." }],
-    samuelFim: [{ quem: "samuel", texto: "Bora para o pátio? É só sair pela Porta das Ovelhas, lá embaixo." }],
+    samuelAntes: [{ quem: "samuel", texto: "Trinta e oito anos esperando alguém ajudar. Vai lá falar com ele." }],
+    samuelVai: [
+      { quem: "samuel", texto: "Espera aí... ele foi curado e nem sabe por quem?" },
+      { quem: "samuel", texto: "Eu vou atrás dele. Quero ver se ele descobre quem foi!" },
+    ],
+    samuelVolta: [
+      { quem: "samuel", texto: "Gente! Gente! Eu segui o homem da maca até o templo. Vocês não vão acreditar!" },
+      { quem: "narrador", ref: "João 5:14–15", texto: "Depois, Jesus encontrou o homem no templo e falou com ele. Então o homem foi e contou a todos que era Jesus quem o tinha curado." },
+      { quem: "samuel", texto: "Ele descobriu! Trinta e oito anos parado, e agora saiu contando para todo mundo quem foi." },
+      { quem: "samuel", texto: "Bora para o pátio? A equipe está esperando a gente para fechar o caso." },
+    ],
+    samuelFim: [{ quem: "samuel", texto: "É só sair pela Porta das Ovelhas, lá embaixo. Eu vou junto!" }],
     doente: [{ quem: "doente1", texto: "Estamos todos esperando... há muito tempo." }],
     doente2Antes: [{ quem: "doente2", texto: "Dizem que de tempos em tempos a água se agita... e todo mundo tenta descer ao mesmo tempo." }],
     doente2: [{ quem: "doente2", texto: "Você viu? Aquele homem se levantou! Quem é que o curou?" }],
@@ -254,15 +264,18 @@ export const DIALOGOS = {
     bea: [{ quem: "bea", texto: "Eu fico pensando na mulher do poço. Ele sabia tudo da vida dela... e continuou ali, conversando com ela." }],
     mj: [{ quem: "mj", texto: "Repara: ninguém foi obrigado a acreditar. A mulher só disse “venham ver”. E o pessoal foi ver." }],
     thama: [{ quem: "thama", texto: "Trinta e oito anos sem ninguém para ajudar. E ele parou justamente para aquele homem." }],
-    samuel: [{ quem: "samuel", texto: "No fim, a pergunta é sempre a mesma: quem é ele? Isso não dá para responder só jogando." }],
+    samuel: [
+      { quem: "samuel", texto: "O homem de Betesda só descobriu quem o curou depois, quando encontrou Jesus de novo." },
+      { quem: "samuel", texto: "Às vezes a resposta não vem na hora. Mas dá para continuar procurando." },
+    ],
     fechar: [
       { quem: "jogador", texto: "Caná: água que virou vinho. O mestre-sala não sabia de onde vinha, mas os serventes sabiam." },
       { quem: "jogador", texto: "Samaria: ele sabia tudo da vida de uma mulher, e mesmo assim ficou para conversar. E disse que era o Messias." },
-      { quem: "jogador", texto: "Jerusalém: um homem esperou trinta e oito anos e se levantou, sem saber quem o tinha curado." },
+      { quem: "jogador", texto: "Jerusalém: um homem esperou trinta e oito anos e se levantou. Só depois descobriu quem o tinha curado." },
       { quem: "jogador", texto: "Eu descobri o nome dele. Descobri o que ele fez. Mas ainda falta uma resposta." },
     ],
     autor: [
-      { quem: "narrador", nome: CASO, texto: "Quem escreveu esses relatos contou, no fim do livro, por que escreveu:" },
+      { quem: "samuel", texto: "Sabe o que eu descobri? Quem escreveu esses relatos contou, no fim do livro, por que escreveu." },
       { quem: "narrador", ref: "João 20:30–31", texto: "Jesus fez muitos outros sinais que não estão escritos neste livro. Estes foram escritos para que vocês creiam que Jesus é o Cristo, o Filho de Deus, e, crendo, tenham vida em seu nome." },
     ],
     final: [
@@ -287,13 +300,14 @@ export const PISTAS = {
   messias: "No poço, Jesus disse que é o Messias, o Cristo: o salvador que o povo esperava havia séculos.",
   venham: "A mulher chamou a cidade: “Venham ver”. E muitos foram ver com os próprios olhos.",
   naoSabia: "Em Betesda, o homem curado não sabia quem o tinha curado.",
+  descobriu: "O Samuel seguiu o homem até o templo: lá ele encontrou Jesus de novo e descobriu quem o tinha curado.",
 };
 
 // Os relatos que aparecem no diário, conforme o jogador avança.
 export const RELATOS = [
   { simbolo: "talha", ref: "João 2:1–11", lugar: "Caná", resumo: "Num casamento, Jesus transforma água em vinho. “Este foi o primeiro dos sinais de Jesus.”", andamento: "Caná — de onde veio o vinho novo?" },
   { simbolo: "gota", ref: "João 4:1–42", lugar: "Samaria", resumo: "Junto ao poço, Jesus conversa com uma mulher samaritana e diz que é o Messias.", andamento: "Samaria — a conversa no poço." },
-  { simbolo: "maca", ref: "João 5:1–15", lugar: "Jerusalém", resumo: "No tanque de Betesda, Jesus cura um homem doente havia 38 anos, que nem sabia quem ele era.", andamento: "Jerusalém — o homem que esperava havia 38 anos." },
+  { simbolo: "maca", ref: "João 5:1–15", lugar: "Jerusalém", resumo: "No tanque de Betesda, Jesus cura um homem doente havia 38 anos. Ele só descobre quem o curou depois, no templo.", andamento: "Jerusalém — o homem que esperava havia 38 anos." },
 ];
 
 // Trecho consultado no enigma da porta de pedra.

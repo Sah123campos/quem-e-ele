@@ -13,8 +13,8 @@ Endereço (com o GitHub Pages ligado): `https://sah123campos.github.io/quem-e-el
 |---|---|---|
 | **1. Algo não se encaixa** | Caná (João 2) | O vinho da festa tinha acabado e voltou melhor. Ninguém sabe de onde veio. O jogador ouve testemunhas, junta pistas (as talhas de água cheias de vinho, pegadas molhadas com a luz negra, barris vazios) e convence o servente a contar o que viu. A lembrança dele mostra a água virando vinho. A mãe do convidado revela o nome: **Jesus, de Nazaré**. |
 | **2. Os relatos** | Poço de Jacó (João 4) | Jesus conversa com a mulher samaritana e diz: “Sou eu” (o Messias). Ela corre para a cidade: “Venham ver”. O povo vem e diz: “Nós mesmos ouvimos”. Para seguir, a porta de pedra pergunta o que ele ofereceu a ela; dá para **consultar o trecho do Evangelho** ali mesmo. |
-| | Betesda (João 5) | Jesus cura o homem que esperava havia 38 anos. Quando perguntam quem o curou, ele **não sabe**. A luz negra revela a marca da maca no chão. |
-| **3. A pergunta que ficou** | O pátio | A equipe toda espera. O jogador junta as três evidências, a pergunta **QUEM É ELE?** aparece na muralha e o próprio autor do relato explica por que escreveu (João 20:30–31). Sem cobrar resposta: “Essa resposta ninguém pode dar por você.” |
+| | Betesda (João 5) | Jesus cura o homem que esperava havia 38 anos. Quando perguntam quem o curou, ele **não sabe**. O Samuel vai atrás dele e, enquanto isso, a luz negra revela a marca da maca no chão. O Samuel volta correndo do templo: lá o homem encontrou Jesus de novo e descobriu quem o curou (João 5:14–15). |
+| **3. A pergunta que ficou** | O pátio | A equipe toda espera. O jogador junta as três evidências, a pergunta **QUEM É ELE?** aparece na muralha e o Samuel mostra por que o autor dos relatos escreveu (João 20:30–31). Sem cobrar resposta: “Essa resposta ninguém pode dar por você.” |
 
 Depois vem a tela final com a pergunta “Quem é Jesus, afinal?” e o convite.
 
