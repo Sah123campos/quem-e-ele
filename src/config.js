@@ -5,7 +5,7 @@
 export const CONVITE = {
   evento: "CULTO ADOLES",
   data: "Sexta-feira, 30 de outubro",
-  horario: "",
+  horario: "19h30",
   local: "",
   detalhe: "Aberto a todos os adolescentes",
   // Botão extra com link (ex.: localização no mapa). Vazio = sem botão.

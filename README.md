@@ -32,7 +32,7 @@ Tudo fica em `src/config.js`:
 export const CONVITE = {
   evento: "CULTO ADOLES",
   data: "Sexta-feira, 30 de outubro",
-  horario: "",          // ex.: "19h30" (vazio = não aparece)
+  horario: "19h30",     // vazio ("") = não aparece
   local: "",            // ex.: "Rua ..., nº ..." (vazio = não aparece)
   detalhe: "Aberto a todos os adolescentes",
   link: "",             // ex.: link do Google Maps → aparece um botão
