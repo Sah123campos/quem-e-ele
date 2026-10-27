@@ -1,0 +1,124 @@
+/* Quem é Ele? — complementos próprios deste jogo (a base fica em estilo.css) */
+
+/* ---------- Tela título ---------- */
+.titulo-gancho {
+  margin: 0.6em 0 0;
+  color: var(--texto);
+  font-size: clamp(13px, 3vh, 22px);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Enigma de múltipla escolha ---------- */
+.relato {
+  margin: 0 0 10px;
+  text-align: left;
+  background: #120d20;
+  border: 2px solid #3a2e5a;
+}
+.relato summary {
+  padding: 8px 12px;
+  color: #d8c8ff;
+  font-size: clamp(13px, 2vh + 5px, 17px);
+  cursor: pointer;
+  list-style: none;
+}
+.relato summary::-webkit-details-marker { display: none; }
+.relato summary::before { content: "▸ "; color: var(--uv); }
+.relato[open] summary::before { content: "▾ "; }
+.relato p {
+  margin: 0;
+  padding: 0 12px 10px;
+  font-style: italic;
+  color: #f6efff;
+  max-height: 32vh;
+  overflow-y: auto;
+}
+.opcoes-escolha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.opcao-escolha {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-align: left;
+  font-size: clamp(14px, 2.2vh + 5px, 19px);
+}
+.opcao-escolha kbd { flex: none; }
+body.toque-ativo .opcao-escolha kbd { display: none; }
+.opcao-escolha.certa { border-color: #9af0b0; background: #1e3a2a; }
+.opcao-escolha.errada { opacity: 0.45; border-color: #7a3a4a; }
+
+/* ---------- Final: a pergunta ---------- */
+.final-parte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.final-titulo { margin: 0.4em 0 0.3em; }
+.final-linha-menor { font-size: clamp(14px, 3.4vh, 24px); color: #d8c8ff; }
+.final-seguir {
+  width: min(80vw, 340px);
+  margin-top: 0.8em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s;
+}
+.final-seguir.visivel { opacity: 1; pointer-events: auto; }
+
+/* ---------- Final: o convite ---------- */
+.final-convite {
+  width: min(94vw, 900px);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 0 4px;
+  display: grid;
+  gap: 0 28px;
+  align-items: center;
+  animation: cartaoEntra 0.8s ease-out;
+}
+@media (orientation: landscape) {
+  .final-convite { grid-template-columns: 1.1fr 1fr; }
+}
+.convite-cabeca, .convite-corpo { text-align: center; }
+.convite-chamada {
+  margin: 0 0 0.4em;
+  font-size: clamp(15px, 3.6vh, 24px);
+  color: #e8dcff;
+  line-height: 1.25;
+}
+.convite-evento {
+  margin: 0.15em 0;
+  font-size: clamp(28px, 9vh, 58px);
+  line-height: 1;
+  color: #ffd46a;
+  text-shadow: 0 4px 0 #6e4a1c, 0 0 26px rgba(255, 210, 120, 0.45);
+  letter-spacing: 0.02em;
+}
+.convite-quando {
+  margin: 0.3em 0 0.1em;
+  font-size: clamp(16px, 4.4vh, 28px);
+  color: var(--texto);
+  font-weight: 700;
+}
+.convite-local, .convite-detalhe {
+  margin: 0.1em 0;
+  font-size: clamp(14px, 3.2vh, 21px);
+  color: #e8dcff;
+}
+.convite-texto {
+  margin: 0.2em 0 0.4em;
+  font-size: clamp(14px, 3.2vh, 20px);
+  line-height: 1.3;
+  color: var(--texto);
+}
+.convite-fecho {
+  margin: 0 0 0.5em;
+  font-size: clamp(13px, 3vh, 19px);
+  color: #c9a8ff;
+  text-shadow: 0 0 10px rgba(170, 110, 255, 0.5);
+}
+.convite-corpo .btn { margin: 6px 0; padding: 10px 14px; }
+a.btn { text-decoration: none; text-align: center; }
