@@ -51,7 +51,7 @@ const def = {
     { tipo: "rachadura", x: 4, y: 2.2, n: 10 },
   ],
   bloqueios: [{ x: 0, y: 14, w: 24, h: 1 }],
-  inicio: { x: 12, y: 12.6, dir: "cima" },
+  inicio: { x: 12, y: 10.6, dir: "cima" },
   escuridao: 0.62,
   musica: "betesda",
 };
@@ -72,7 +72,7 @@ function montar(jogo, m) {
 
   R.jesus = npc(m, "jesus", px(12), px(5.2), {
     dir: "baixo",
-    interacao: conversa("Ouvir Jesus", ouvirJesus, { raio: 58, ativo: (j) => !j.flag("ceia.ouviu") }),
+    interacao: conversa("Ouvir Jesus", ouvirJesus, { raio: 90, ativo: (j) => !j.flag("ceia.ouviu") }),
   });
   const lugares = { pedro: [9.4, 8.9, "cima"], joao: [14.4, 5.3, "baixo"], tome: [6, 6.6, "dir"], filipe: [18, 6.6, "esq"] };
   R.disc = {};
@@ -88,9 +88,9 @@ function montar(jogo, m) {
 }
 
 async function aoEntrar(jogo) {
-  await jogo.ui.cartao("Parte 2", "Uma noite em Jerusalém", "João 13–15", 2600);
+  await jogo.ui.cartao("", "Uma noite em Jerusalém", "João 15", 2000);
   await jogo.falar(D.intro);
-  jogo.objetivo("Converse com os amigos de Jesus e ouça o que ele tem a dizer.");
+  jogo.objetivo("Chegue perto de Jesus e aperte para ouvir.");
 }
 
 async function ouvirJesus(jogo) {
@@ -106,7 +106,6 @@ async function ouvirJesus(jogo) {
   }
   R.jesus.olharPara(j.x, j.y);
   jogo.focar(px(12), px(5.6));
-  await jogo.falar(D.fala);
 
   // A frase do versículo: o coração acende na parede.
   jogo.audio.sfx("simbolo");

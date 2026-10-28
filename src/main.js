@@ -10,7 +10,7 @@ const $ = (id) => document.getElementById(id);
 
 const jogo = new Jogo({
   salas: SALAS,
-  salaInicial: "patio",
+  salaInicial: "ceia",
   chave: "maior-amor",
   simbolos: [],
   finalizar,

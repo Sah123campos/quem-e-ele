@@ -43,8 +43,7 @@ export const DIALOGOS = {
   // ================= FASE 2 — UMA NOITE EM JERUSALÉM (João 13–15) =================
   ceia: {
     intro: [
-      { quem: "narrador", nome: "Jerusalém", texto: "Jerusalém, quase dois mil anos atrás. Jesus está jantando com os amigos mais próximos dele." },
-      { quem: "narrador", nome: "Jerusalém", texto: "É a última noite antes de ele ser preso. E ele sabe disso." },
+      { quem: "narrador", nome: "Jerusalém", texto: "Dois mil anos atrás, Jesus jantava com os amigos. Era a última noite antes de ele ser preso." },
     ],
     pedro: [
       { quem: "pedro", texto: "Eu sou Pedro. Conheço o Mestre há três anos. Larguei tudo para seguir ele." },
@@ -72,13 +71,11 @@ export const DIALOGOS = {
     ],
     versiculo: [{ quem: "jesus", ref: "João 15:13", texto: "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos." }],
     amigos: [
-      { quem: "jesus", ref: "João 15:15", texto: "Eu não chamo mais vocês de servos. Eu chamo vocês de amigos." },
-      { quem: "pedro", texto: "Dar a vida? Mestre... do que o senhor está falando?" },
+      { quem: "jesus", ref: "João 15:15", texto: "Eu chamo vocês de amigos." },
     ],
     depois: [
-      { quem: "narrador", nome: "O que aconteceu", ref: "João 18–19", texto: "Naquela mesma noite, Jesus foi preso. No dia seguinte, morreu numa cruz." },
-      { quem: "narrador", nome: "O que aconteceu", texto: "Ele podia ter fugido. Não fugiu. Fez exatamente o que tinha dito: deu a vida pelos amigos." },
-      { quem: "narrador", nome: "O que aconteceu", ref: "João 20", texto: "Três dias depois, os amigos dele encontraram o túmulo vazio. Jesus estava vivo." },
+      { quem: "narrador", nome: "O que aconteceu", texto: "No dia seguinte, ele morreu numa cruz. Deu a vida pelos amigos, como tinha dito." },
+      { quem: "narrador", nome: "O que aconteceu", texto: "Três dias depois, o túmulo estava vazio. Ele está vivo." },
     ],
   },
 };

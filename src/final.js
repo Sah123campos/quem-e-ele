@@ -17,17 +17,17 @@ export async function finalizar(jogo) {
     for (let i = 1; i <= texto.length; i++) {
       p.textContent = texto.slice(0, i);
       if (i % 3 === 0) jogo.audio.blip("narrador");
-      await esperar(0.032);
+      await esperar(0.02);
     }
   };
   await esperar(1.2);
   await escrever("final-linha1", "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos.");
   await esperar(0.7);
-  await escrever("final-linha2", "Jesus disse isso. E depois fez. E ele chamou de amigos não só os que estavam naquela mesa.");
+  await escrever("final-linha2", "Jesus disse isso. E fez.");
   await esperar(0.9);
   $("final-titulo").classList.add("visivel");
   jogo.audio.sfx("simbolo");
-  await esperar(1.8);
+  await esperar(1);
   await escrever("final-linha3", "Essa amizade também é para você.");
   await esperar(0.6);
   $("btn-final-seguir").classList.add("visivel");

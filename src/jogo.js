@@ -43,7 +43,7 @@ export function estadoInicial(sala = "cana") {
 //   rotuloSimbolo — texto do aviso ao achar um símbolo (opcional)
 export class Jogo {
   constructor(roteiro = {}) {
-    this.roteiro = { salaInicial: "patio", chave: "maior-amor", ...roteiro };
+    this.roteiro = { salaInicial: "ceia", chave: "maior-amor", ...roteiro };
     this.salas = this.roteiro.salas;
     this.chaveProgresso = `${this.roteiro.chave}:progresso`;
     this.chaveConfig = `${this.roteiro.chave}:config`;

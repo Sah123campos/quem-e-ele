@@ -1,6 +1,6 @@
 # O Maior Amor
 
-Jogo curto (cerca de 4 minutos) em pixel art, feito com o mesmo motor de "Quem é Ele?", sobre João 15:13:
+Jogo de cerca de 1 minuto em pixel art, feito com o mesmo motor de "Quem é Ele?", sobre João 15:13:
 "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos."
 
 Endereço: `https://sah123campos.github.io/quem-e-ele/`
