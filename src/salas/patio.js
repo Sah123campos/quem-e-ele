@@ -24,6 +24,7 @@ function montar(jogo, m) {
     ["bea", 19, 4.1, "esq"],
     ["thama", 15.2, 5.4, "dir"],
     ["mj", 18.8, 5.4, "esq"],
+    ["samuel", 20.6, 4.8, "esq"],
   ];
   for (const [id, x, y, dir] of roda) R[id] = npc(m, id, px(x), px(y), { dir, gesticula: true });
 }
