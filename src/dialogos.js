@@ -41,17 +41,43 @@ export const DIALOGOS = {
   },
 
   // ================= FINAL — a equipe reunida =================
-  reuniao: [
-    { quem: "debora", texto: "Ei, você chegou! A gente estava falando justamente disso: o que é um amigo de verdade?" },
-    { quem: "kenedy", texto: "Amigo de verdade não some quando a coisa aperta." },
-    { quem: "bea", texto: "É quem fica do seu lado mesmo quando você erra." },
-    { quem: "thama", texto: "E te aceita do jeito que você é. Sem fingir." },
-    { quem: "mj", texto: "Amigo de verdade te dá o último pedaço de pizza." },
-    { quem: "mj", texto: "Tô brincando... mais ou menos. É abrir mão de uma coisa sua para o outro ficar bem." },
-    { quem: "samuel", texto: "E às vezes paga um preço que era seu. Tipo assumir a culpa no seu lugar." },
-    { quem: "debora", texto: "A gente conhece um amigo assim. Um amigo que deu tudo pela gente." },
-    { quem: "debora", texto: "Quer descobrir quem é? Vem com a gente!" },
-  ],
+  reuniao: {
+    intro: [
+      { quem: "debora", texto: "Ei, você voltou! A galera se espalhou pelo pátio e escondeu mensagens no chão." },
+      { quem: "debora", texto: "Cada um escreveu o que acha que é um amigo de verdade. Mas só dá para ver com luz negra. Toma, usa essa!" },
+      { quem: "debora", texto: "Acha as cinco mensagens e depois a gente se reúne aqui." },
+    ],
+    debora: [{ quem: "debora", texto: "As mensagens estão no chão, perto de cada um. Liga a luz negra e procura!" }],
+    escondida: [{ quem: "jogador", texto: "Deve ter alguma coisa escrita no chão aqui perto. Vou usar a luz negra." }],
+    kenedy: [
+      { quem: "kenedy", texto: "Achou a minha! “APARECE.”" },
+      { quem: "kenedy", texto: "Amigo de verdade não some quando a coisa aperta. Ele aparece." },
+    ],
+    bea: [
+      { quem: "bea", texto: "Essa é minha! “FICA.”" },
+      { quem: "bea", texto: "Amigo de verdade fica do seu lado mesmo quando você erra." },
+    ],
+    thama: [
+      { quem: "thama", texto: "Você achou! “ACEITA.”" },
+      { quem: "thama", texto: "Amigo de verdade te aceita do jeito que você é. Sem fingir." },
+    ],
+    mj: [
+      { quem: "mj", texto: "“DIVIDE.” Amigo de verdade te dá o último pedaço de pizza." },
+      { quem: "mj", texto: "Tô brincando... mais ou menos. É abrir mão de uma coisa sua para o outro ficar bem." },
+    ],
+    samuel: [
+      { quem: "samuel", texto: "Achou a minha! “PAGA.”" },
+      { quem: "samuel", texto: "Às vezes, amigo de verdade paga um preço que era seu. Tipo assumir a culpa no seu lugar." },
+      { quem: "samuel", texto: "Pouca gente faria isso. Mas tem alguém que fez." },
+    ],
+    depois: [{ quem: "jogador", texto: "Essa eu já achei." }],
+    chamar: [{ quem: "debora", texto: "Achou todas! Galera, vem todo mundo pra cá!" }],
+    final: [
+      { quem: "jogador", texto: "Aparece, fica, aceita, divide, paga o preço..." },
+      { quem: "debora", texto: "A gente conhece um amigo que faz tudo isso. Um amigo que deu tudo pela gente." },
+      { quem: "debora", texto: "Quer descobrir quem é? Vem com a gente!" },
+    ],
+  },
 
   // ================= FASE 2 — UMA NOITE EM JERUSALÉM (João 13–15) =================
   ceia: {
