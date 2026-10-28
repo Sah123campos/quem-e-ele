@@ -1,5 +1,5 @@
 // Cenário de fundo da tela título: um pátio de colunas à noite, com a câmera
-// passeando devagar e os três símbolos brilhando no escuro.
+// passeando devagar e um coração brilhando no escuro.
 import * as A from "../arte/objetos.js";
 import { desenharSimbolo } from "../arte/simbolos.js";
 import { px, paleta, Mapa, objeto, braseiro, ambiente, desenharNevoa } from "./comum.js";
@@ -56,7 +56,7 @@ function montar(jogo, m) {
     objeto(m, A.coluna(q), px(x), px(y), { solido: { w: 16, h: 7 } });
   }
   m.luzes.push({ x: px(17), y: px(8), raio: 160, cor: [70, 130, 210], brilho: 0.14, intensidade: 0.35 });
-  simbolos = ["talha", "gota", "maca"].map((id, i) => ({ img: desenharSimbolo(id), x: px(12 + i * 5), y: px(3.6), fase: i * 2.1 }));
+  simbolos = [{ img: desenharSimbolo("coracao", "#ffd6d6", "#d0304a"), x: px(17), y: px(3.6), fase: 0 }];
 }
 
 function atualizar(jogo, dt) {

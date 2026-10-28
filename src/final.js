@@ -1,4 +1,4 @@
-// Tela final de "Quem é Ele?": a pergunta que ficou e o convite para sexta.
+// Tela final de "O Maior Amor": a pergunta que ficou e o convite para sexta.
 import { esperar } from "./jogo.js";
 import { CONVITE, MENSAGEM_COMPARTILHAR } from "./config.js";
 
@@ -21,14 +21,14 @@ export async function finalizar(jogo) {
     }
   };
   await esperar(1.2);
-  await escrever("final-linha1", "Você encontrou os sinais.");
+  await escrever("final-linha1", "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos.");
   await esperar(0.7);
-  await escrever("final-linha2", "Mas ainda existe uma pergunta que nenhuma pista conseguiu responder completamente:");
+  await escrever("final-linha2", "Jesus disse isso. E depois fez. E ele chamou de amigos não só os que estavam naquela mesa.");
   await esperar(0.9);
   $("final-titulo").classList.add("visivel");
   jogo.audio.sfx("simbolo");
   await esperar(1.8);
-  await escrever("final-linha3", "Há mais nessa história do que você descobriu aqui.");
+  await escrever("final-linha3", "Essa amizade também é para você.");
   await esperar(0.6);
   $("btn-final-seguir").classList.add("visivel");
   try {

@@ -7,12 +7,12 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Quem é Ele?</title>
-  <meta name="description" content="Um jogo de investigação: três acontecimentos impossíveis e uma pergunta. Você consegue resolver o caso?">
+  <title>O Maior Amor</title>
+  <meta name="description" content="Uma pergunta simples: qual é a maior prova de amor? Um jogo curto para descobrir a resposta.">
   <!-- Prévia do link no WhatsApp e nas redes -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Quem é Ele? 🔍">
-  <meta property="og:description" content="Três acontecimentos impossíveis. Uma pergunta. Você consegue resolver o caso?">
+  <meta property="og:title" content="O Maior Amor ❤️">
+  <meta property="og:description" content="Qual é a maior prova de amor? Um jogo de 4 minutos.">
   <meta property="og:image" content="https://sah123campos.github.io/quem-e-ele/capa.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -38,7 +38,7 @@
       </div>
       <div id="prompt" class="prompt" hidden><kbd>E</kbd><span id="prompt-texto"></span></div>
       <div id="dicas-teclado" class="dicas-teclado">
-        <span><kbd>WASD</kbd> andar</span><span><kbd>E</kbd> interagir</span><span><kbd>F</kbd> lanterna</span><span id="dica-uv" hidden><kbd>Q</kbd> luz negra</span><span><kbd>J</kbd> diário</span>
+        <span><kbd>WASD</kbd> andar</span><span><kbd>E</kbd> interagir</span><span id="dica-uv" hidden></span><span><kbd>J</kbd> diário</span>
       </div>
     </div>
 
@@ -77,24 +77,12 @@
     <div id="diario" class="painel-tela" hidden>
       <div class="moldura painel">
         <button class="fechar" data-fechar aria-label="Fechar">×</button>
-        <h2>Diário de investigação</h2>
+        <h2>Diário</h2>
         <section>
           <h3>Objetivo atual</h3>
           <p id="diario-objetivo"></p>
         </section>
-        <section>
-          <h3>Evidências</h3>
-          <div id="diario-simbolos" class="simbolos"></div>
-        </section>
-        <section>
-          <h3>Pistas</h3>
-          <ul id="diario-pistas" class="pistas"></ul>
-        </section>
-        <section>
-          <h3>Relatos do Evangelho de João</h3>
-          <ul id="diario-relatos" class="leituras"></ul>
-          <p class="nota">Os acontecimentos seguem o relato do Evangelho de João. A equipe de investigação, as pistas e o caso são parte da ficção do jogo.</p>
-        </section>
+        <div hidden><div id="diario-simbolos"></div><ul id="diario-pistas"></ul><ul id="diario-relatos"></ul></div>
       </div>
     </div>
 
@@ -125,15 +113,15 @@
     <!-- Tela título -->
     <div id="titulo" class="tela-titulo">
       <div class="titulo-logo">
-        <div class="titulo-pre">um jogo de investigação</div>
-        <h1><span>Quem é</span><span>Ele?</span></h1>
-        <p class="titulo-gancho">Três acontecimentos impossíveis. Uma pergunta.</p>
+        <div class="titulo-pre">um jogo curto</div>
+        <h1><span>O Maior</span><span>Amor</span></h1>
+        <p class="titulo-gancho">Qual é a maior prova de amor que existe?</p>
       </div>
       <div class="titulo-botoes">
-        <button id="btn-comecar" class="btn btn-principal">Começar investigação</button>
+        <button id="btn-comecar" class="btn btn-principal">Começar</button>
         <button id="btn-continuar" class="btn" hidden>Continuar de onde parei</button>
       </div>
-      <div class="titulo-rodape">Baseado nos relatos do Evangelho de João · cerca de 8 minutos · use fones de ouvido</div>
+      <div class="titulo-rodape">Baseado no Evangelho de João · cerca de 4 minutos · use fones de ouvido</div>
     </div>
 
     <!-- Final: a pergunta que ficou e o convite -->
@@ -141,13 +129,13 @@
       <div id="final-parte1" class="final-parte">
         <p id="final-linha1" class="final-linha"></p>
         <p id="final-linha2" class="final-linha"></p>
-        <h2 id="final-titulo" class="final-titulo">Quem é Jesus, afinal?</h2>
+        <h2 id="final-titulo" class="final-titulo">Ele te chama de amigo.</h2>
         <p id="final-linha3" class="final-linha final-linha-menor"></p>
         <button id="btn-final-seguir" class="btn btn-principal final-seguir">Continuar</button>
       </div>
       <div id="final-convite" class="final-convite painel" hidden>
         <div class="convite-cabeca">
-          <p class="convite-chamada">Nesta sexta-feira, você está convidado a continuar essa investigação com a gente.</p>
+          <p class="convite-chamada">Nesta sexta-feira, vem conhecer essa história de perto com a gente.</p>
           <h2 id="convite-evento" class="convite-evento"></h2>
           <p id="convite-quando" class="convite-quando"></p>
           <p id="convite-local" class="convite-local"></p>
@@ -155,7 +143,7 @@
         </div>
         <div class="convite-corpo">
           <p class="convite-texto">Você não precisa conhecer a Bíblia, frequentar uma igreja ou saber o que esperar. Só precisa vir e conhecer.</p>
-          <p class="convite-fecho">O mistério termina aqui. A experiência começa ao vivo.</p>
+          <p class="convite-fecho">O jogo termina aqui. A amizade começa ao vivo.</p>
           <button id="btn-compartilhar" class="btn btn-principal">Contar para quem me convidou</button>
           <a id="btn-link" class="btn" target="_blank" rel="noopener" hidden></a>
           <button id="btn-reiniciar" class="btn btn-secundario">Jogar de novo</button>
@@ -171,7 +159,7 @@
       <button id="btn-girar" class="btn btn-principal" hidden>Virar a tela e jogar</button>
     </div>
 
-    <div id="carregando" class="carregando"><div class="carregando-barra"><div id="carregando-progresso"></div></div><p>Preparando a investigação…</p></div>
+    <div id="carregando" class="carregando"><div class="carregando-barra"><div id="carregando-progresso"></div></div><p>Carregando…</p></div>
     <div id="fade" class="fade"></div>
   </div>
   <script type="module" src="src/main.js"></script>

@@ -1,8 +1,6 @@
-// As salas de "Quem é Ele?". A tela título é só cenário (o pátio à noite).
+// As salas de "O Maior Amor". A tela título é só cenário (o pátio à noite).
 import { titulo } from "./titulo.js";
-import { cana } from "./cana.js";
-import { poco } from "./poco.js";
-import { betesda } from "./betesda.js";
 import { patio } from "./patio.js";
+import { ceia } from "./ceia.js";
 
-export const SALAS = { titulo, cana, poco, betesda, patio };
+export const SALAS = { titulo, patio, ceia };

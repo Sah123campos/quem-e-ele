@@ -236,6 +236,10 @@ export const ELENCO = {
       corCobertura: "#f6f0e4",
     },
   },
+  pedro: { nome: "Pedro", sprite: { pele: "#a8744c", cabelo: "#3a2a1c", estilo: "curto", roupa: "tunica", top: "#6a5a8a", acento: "#c8a050", sapato: "#5a3e26", barba: true } },
+  joao: { nome: "João", sprite: { pele: "#c08a62", cabelo: "#5a3a22", estilo: "medio", roupa: "tunica", top: "#4a7a6a", acento: "#d8c49a", sapato: "#5a3e26" } },
+  tome: { nome: "Tomé", sprite: { pele: "#9a6a44", cabelo: "#1e140c", estilo: "curto", roupa: "tunica", top: "#8a6a3a", acento: "#e0d0a0", sapato: "#5a3e26", barba: true, cobertura: "faixa", corCobertura: "#c8b896" } },
+  filipe: { nome: "Filipe", sprite: { pele: "#b88058", cabelo: "#2a1a10", estilo: "curto", roupa: "tunica", top: "#7a3a3a", acento: "#c8a050", sapato: "#5a3e26", barba: true } },
   convidado1: {
     nome: "Convidado",
     sprite: {
