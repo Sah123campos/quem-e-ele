@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0812">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>O Maior Amor</title>
+  <meta name="description" content="Uma pergunta simples: qual é a maior prova de amor? Um jogo curto para descobrir a resposta.">
+  <!-- Prévia do link no WhatsApp e nas redes -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="O Maior Amor ❤️">
+  <meta property="og:description" content="Qual é a maior prova de amor? Um jogo de 4 minutos.">
+  <meta property="og:image" content="https://sah123campos.github.io/maior-amor/capa.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://sah123campos.github.io/maior-amor/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="assets/icone.svg">
+  <link rel="apple-touch-icon" href="assets/icone-180.png">
+  <link rel="preload" href="assets/fontes/PixelifySans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/quem-e-ele.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="tela" aria-label="Cenário do jogo"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" hidden>
+      <div id="objetivo" class="objetivo"><span class="objetivo-rotulo">Objetivo</span><span id="objetivo-texto"></span></div>
+      <div class="hud-botoes">
+        <button id="btn-som" class="btn-icone" aria-label="Ligar ou desligar o som"><span class="ico ico-som"></span></button>
+        <button id="btn-pausa" class="btn-icone" aria-label="Pausar"><span class="ico ico-pausa"></span></button>
+      </div>
+      <div id="prompt" class="prompt" hidden><kbd>E</kbd><span id="prompt-texto"></span></div>
+      <div id="dicas-teclado" class="dicas-teclado">
+        <span><kbd>WASD</kbd> andar</span><span><kbd>E</kbd> interagir</span><span id="dica-uv" hidden></span><span><kbd>J</kbd> diário</span>
+      </div>
+    </div>
+
+    <!-- Controles de toque -->
+    <div id="toque" hidden>
+      <div id="zona-joystick"></div>
+      <div id="joystick" hidden><div id="joystick-pino"></div></div>
+      <button id="btn-interagir" class="btn-toque btn-grande" aria-label="Interagir"><span class="ico ico-mao"></span><span id="btn-interagir-texto">Interagir</span></button>
+      <button id="btn-lanterna" class="btn-toque" aria-label="Lanterna"><span class="ico ico-lanterna"></span></button>
+      <button id="btn-uv" class="btn-toque btn-uv" aria-label="Luz negra" hidden><span class="ico ico-uv"></span></button>
+      <button id="btn-diario" class="btn-toque" aria-label="Diário"><span class="ico ico-diario"></span></button>
+    </div>
+
+    <!-- Diálogo -->
+    <div id="dialogo" class="moldura" hidden>
+      <div id="dialogo-retrato" class="retrato moldura-fina"><canvas id="retrato-canvas" width="96" height="96"></canvas></div>
+      <div class="dialogo-corpo">
+        <div id="dialogo-nome" class="placa-nome"></div>
+        <p id="dialogo-texto"></p>
+        <div id="dialogo-ref" class="dialogo-ref"></div>
+      </div>
+      <div class="dialogo-seta" aria-hidden="true"></div>
+    </div>
+
+    <!-- Aviso rápido (descobertas) -->
+    <div id="aviso" class="aviso" hidden></div>
+
+    <!-- Cartão de fase -->
+    <div id="cartao" class="cartao" hidden>
+      <div class="cartao-num" id="cartao-num"></div>
+      <div class="cartao-titulo" id="cartao-titulo"></div>
+      <div class="cartao-sub" id="cartao-sub"></div>
+    </div>
+
+    <!-- Diário de investigação -->
+    <div id="diario" class="painel-tela" hidden>
+      <div class="moldura painel">
+        <button class="fechar" data-fechar aria-label="Fechar">×</button>
+        <h2>Diário</h2>
+        <section>
+          <h3>Objetivo atual</h3>
+          <p id="diario-objetivo"></p>
+        </section>
+        <div hidden><div id="diario-simbolos"></div><ul id="diario-pistas"></ul><ul id="diario-relatos"></ul></div>
+      </div>
+    </div>
+
+    <!-- Enigmas -->
+    <div id="enigma" class="painel-tela" hidden>
+      <div class="moldura painel painel-enigma">
+        <button class="fechar" data-fechar aria-label="Fechar">×</button>
+        <h2 id="enigma-titulo"></h2>
+        <p id="enigma-texto"></p>
+        <div id="enigma-corpo"></div>
+        <p id="enigma-retorno" class="enigma-retorno" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <!-- Pausa -->
+    <div id="pausa" class="painel-tela" hidden>
+      <div class="moldura painel painel-menu">
+        <h2>Pausado</h2>
+        <button class="btn" data-acao="continuar">Continuar</button>
+        <button class="btn" data-acao="diario">Diário</button>
+        <button class="btn" data-acao="som">Som: ligado</button>
+        <button class="btn" data-acao="vozes">Vozes: desligadas</button>
+        <button class="btn" data-acao="telacheia">Tela cheia</button>
+        <button class="btn btn-secundario" data-acao="reiniciar">Recomeçar do início</button>
+      </div>
+    </div>
+
+    <!-- Tela título -->
+    <div id="titulo" class="tela-titulo">
+      <div class="titulo-logo">
+        <div class="titulo-pre">um jogo curto</div>
+        <h1><span>O Maior</span><span>Amor</span></h1>
+        <p class="titulo-gancho">Qual é a maior prova de amor que existe?</p>
+      </div>
+      <div class="titulo-botoes">
+        <button id="btn-comecar" class="btn btn-principal">Começar</button>
+        <button id="btn-continuar" class="btn" hidden>Continuar de onde parei</button>
+      </div>
+      <div class="titulo-rodape">Baseado no Evangelho de João · cerca de 4 minutos · use fones de ouvido</div>
+    </div>
+
+    <!-- Final: a pergunta que ficou e o convite -->
+    <div id="final" class="tela-final" hidden>
+      <div id="final-parte1" class="final-parte">
+        <p id="final-linha1" class="final-linha"></p>
+        <p id="final-linha2" class="final-linha"></p>
+        <h2 id="final-titulo" class="final-titulo">Ele te chama de amigo.</h2>
+        <p id="final-linha3" class="final-linha final-linha-menor"></p>
+        <button id="btn-final-seguir" class="btn btn-principal final-seguir">Continuar</button>
+      </div>
+      <div id="final-convite" class="final-convite painel" hidden>
+        <div class="convite-cabeca">
+          <p class="convite-chamada">Nesta sexta-feira, vem conhecer essa história de perto com a gente.</p>
+          <h2 id="convite-evento" class="convite-evento"></h2>
+          <p id="convite-quando" class="convite-quando"></p>
+          <p id="convite-local" class="convite-local"></p>
+          <p id="convite-detalhe" class="convite-detalhe"></p>
+        </div>
+        <div class="convite-corpo">
+          <p class="convite-texto">Você não precisa conhecer a Bíblia, frequentar uma igreja ou saber o que esperar. Só precisa vir e conhecer.</p>
+          <p class="convite-fecho">O jogo termina aqui. A amizade começa ao vivo.</p>
+          <button id="btn-compartilhar" class="btn btn-principal">Contar para quem me convidou</button>
+          <a id="btn-link" class="btn" target="_blank" rel="noopener" hidden></a>
+          <button id="btn-reiniciar" class="btn btn-secundario">Jogar de novo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Girar o celular -->
+    <div id="girar" class="girar">
+      <div class="girar-celular"></div>
+      <p>Gire o celular para jogar</p>
+      <small id="girar-dica">O jogo funciona na horizontal</small>
+      <button id="btn-girar" class="btn btn-principal" hidden>Virar a tela e jogar</button>
+    </div>
+
+    <div id="carregando" class="carregando"><div class="carregando-barra"><div id="carregando-progresso"></div></div><p>Carregando…</p></div>
+    <div id="fade" class="fade"></div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
