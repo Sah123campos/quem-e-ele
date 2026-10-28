@@ -4,7 +4,7 @@
 import { DIALOGOS } from "../dialogos.js";
 import * as A from "../arte/objetos.js";
 import { desenharSimbolo, textoPixel } from "../arte/simbolos.js";
-import { px, paleta, Mapa, objeto, npc, tocha, lamparina, ambiente, animar, suave, brilhos, conversa } from "./comum.js";
+import { px, paleta, Mapa, objeto, npc, lamparina, ambiente, animar, suave, brilhos, conversa } from "./comum.js";
 
 const D = DIALOGOS.ceia;
 const DISCIPULOS = ["pedro", "joao", "tome", "filipe"];
@@ -52,7 +52,7 @@ const def = {
   ],
   bloqueios: [{ x: 0, y: 14, w: 24, h: 1 }],
   inicio: { x: 12, y: 10.6, dir: "cima" },
-  escuridao: 0.62,
+  escuridao: 0.8,
   musica: "betesda",
 };
 
@@ -65,14 +65,35 @@ function montar(jogo, m) {
   for (const [x, y, c] of [[7.6, 9], [10.4, 9], [13.6, 9], [16.4, 9], [6, 6.9, "#2e5a7a"], [18, 6.9, "#2e5a7a"]]) {
     objeto(m, A.almofada(c), px(x), px(y), { profundidade: -1 });
   }
-  for (const x of [3, 21]) tocha(m, px(x), px(3.4), { raio: 80 });
-  for (const [arte, x, y] of [[A.anfora(), 2, 4.2], [A.anfora("#9a5a3a"), 2.8, 4.4], [A.cantaro(), 21.4, 12.4], [A.vasoPlanta(1), 2, 12.6]]) {
-    objeto(m, arte, px(x), px(y), { solido: { w: 10, h: 5 } });
-  }
+  // Objetos que dão sentido ao recado (e um barril para confundir).
+  for (const [arte, x, y] of [
+    [A.anfora(), 4.4, 4.3], [A.anfora("#9a5a3a"), 5.3, 4.5], [A.cantaro(), 4.8, 5.4], // água
+    [A.saco(), 19.4, 4.4], [A.saco(), 20.2, 4.6], [A.caixote(), 18.6, 4.3], // farinha
+    [A.vasoPlanta(1), 3.6, 12.6], [A.vasoPlanta(0), 4.6, 12.8], // planta
+    [A.barril(), 19.6, 12.6], [A.barril(), 20.6, 12.7], // vinho (distração)
+  ]) objeto(m, arte, px(x), px(y), { solido: { w: 10, h: 5 } });
+
+  R.recado = objeto(m, A.caixote(), px(14.6), px(11.6), {
+    solido: { w: 12, h: 5 },
+    interacao: { rotulo: "Ler o recado", icone: "examinar", raio: 24, acao: lerRecado },
+  });
+  R.ordem = [];
+  R.tochas = [["agua", 3, 4.4], ["farinha", 21, 4.4], ["planta", 2.4, 12.6], ["vinho", 21.6, 12.6]].map(([id, x, y]) => {
+    const t = objeto(m, A.tochaApagada(), px(x), px(y), {
+      solido: { w: 6, h: 4 },
+      sombra: { rx: 4, ry: 1 },
+      interacao: { rotulo: "Acender a tocha", icone: "usar", raio: 22, ativo: (j) => j.flag("ceia.recado") && !t.acesa && !j.flag("ceia.luz"), acao: (j) => acender(j, t) },
+    });
+    t.id = "tocha-" + id;
+    t.lugar = id;
+    t.luz = { x: px(x), y: px(y) - 24, raio: 1, cor: [255, 150, 60], brilho: 0, tremor: 1 };
+    m.luzes.push(t.luz);
+    return t;
+  });
 
   R.jesus = npc(m, "jesus", px(12), px(5.2), {
     dir: "baixo",
-    interacao: conversa("Ouvir Jesus", ouvirJesus, { raio: 90, ativo: (j) => !j.flag("ceia.ouviu") }),
+    interacao: conversa("Ouvir Jesus", (j) => (j.flag("ceia.luz") ? ouvirJesus(j) : j.falar(D.escuro)), { raio: 90, ativo: (j) => !j.flag("ceia.ouviu") }),
   });
   const lugares = { pedro: [9.4, 8.9, "cima"], joao: [14.4, 5.3, "baixo"], tome: [6, 6.6, "dir"], filipe: [18, 6.6, "esq"] };
   R.disc = {};
@@ -90,7 +111,49 @@ function montar(jogo, m) {
 async function aoEntrar(jogo) {
   await jogo.ui.cartao("", "Uma noite em Jerusalém", "João 15", 2000);
   await jogo.falar(D.intro);
-  jogo.objetivo("Chegue perto de Jesus e aperte para ouvir.");
+  jogo.objetivo("Está escuro! Use a lanterna e leia o recado na caixa.");
+}
+
+const ORDEM_CERTA = ["agua", "planta", "farinha"];
+
+async function lerRecado(jogo) {
+  await jogo.falar(D.recado);
+  if (jogo.flag("ceia.luz")) return;
+  jogo.flag("ceia.recado", true);
+  jogo.objetivo(`Acenda as tochas na ordem do recado. (${R.ordem.length}/3)`);
+}
+
+function luzTocha(t, acesa) {
+  t.acesa = acesa;
+  t.quadros = acesa ? A.tocha().quadros : null;
+  t.fps = 9;
+  t.luz.raio = acesa ? 90 : 1;
+  t.luz.brilho = acesa ? 0.32 : 0;
+}
+
+async function acender(jogo, t) {
+  luzTocha(t, true);
+  jogo.audio.sfx("acerto");
+  R.ordem.push(t.lugar);
+  const certo = R.ordem.every((l, i) => l === ORDEM_CERTA[i]);
+  if (!certo) {
+    await jogo.esperar(0.5);
+    for (const x of R.tochas) luzTocha(x, false);
+    R.ordem = [];
+    jogo.audio.sfx("erro");
+    jogo.objetivo("Acenda as tochas na ordem do recado. (0/3)");
+    return jogo.falar(D.errou);
+  }
+  if (R.ordem.length < 3) {
+    jogo.objetivo(`Acenda as tochas na ordem do recado. (${R.ordem.length}/3)`);
+    return;
+  }
+  jogo.flag("ceia.luz", true);
+  jogo.escuridaoAlvo = 0.3;
+  jogo.piscar([255, 200, 120], 0.8, 0.25);
+  jogo.objetivo("Converse com Jesus.");
+  R.jesus.olharPara(jogo.jogador.x, jogo.jogador.y);
+  await jogo.falar(D.iluminou);
 }
 
 async function ouvirJesus(jogo) {
@@ -106,19 +169,6 @@ async function ouvirJesus(jogo) {
   }
   R.jesus.olharPara(j.x, j.y);
   jogo.focar(px(12), px(5.6));
-
-  // Desafio fácil, sem precisar saber nada da Bíblia.
-  await jogo.falar(D.pergunta);
-  let ok = false;
-  while (!ok) {
-    ok = await jogo.ui.enigmas.escolha({
-      titulo: "Amigo de verdade",
-      texto: "Seu amigo está passando por um momento difícil. O que um amigo de verdade faz?",
-      opcoes: ["Visualiza e não responde", "Fica do lado dele", "Posta um meme sobre ele"],
-      resposta: "Fica do lado dele",
-      dicaErro: "Hmm... você ia querer isso de um amigo? Tenta de novo!",
-    });
-  }
 
   // A frase do versículo: o coração acende na parede.
   jogo.audio.sfx("simbolo");

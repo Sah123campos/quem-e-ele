@@ -69,7 +69,14 @@ export const DIALOGOS = {
       { quem: "jesus", ref: "João 15:9", texto: "Assim como o Pai me amou, eu também amei vocês. Fiquem no meu amor." },
       { quem: "jesus", ref: "João 15:12", texto: "O meu mandamento é este: amem uns aos outros como eu amei vocês." },
     ],
-    pergunta: [{ quem: "jesus", texto: "Antes, me diz uma coisa: o que faz um amigo de verdade?" }],
+    escuro: [{ quem: "jesus", texto: "Está escuro demais para conversar. Acende a lanterna: tem um recado ali na caixa, perto de você." }],
+    recado: [
+      { quem: "narrador", nome: "Recado", texto: "Para iluminar o jantar, acenda as tochas nesta ordem:" },
+      { quem: "narrador", nome: "Recado", texto: "1º — perto de onde se guarda a água.\n2º — perto de algo que está crescendo.\n3º — perto da farinha do pão." },
+    ],
+    errou: [{ quem: "jogador", texto: "Opa... as tochas se apagaram. Acho que errei a ordem. Melhor ler o recado de novo." }],
+    acesa: [{ quem: "jogador", texto: "Essa acendeu. Próxima!" }],
+    iluminou: [{ quem: "jesus", texto: "Agora sim! Dá para ver todo mundo. Vem, tem um lugar para você nesta mesa." }],
     versiculo: [{ quem: "jesus", ref: "João 15:13", texto: "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos." }],
     amigos: [
       { quem: "jesus", ref: "João 15:15", texto: "Eu chamo vocês de amigos." },

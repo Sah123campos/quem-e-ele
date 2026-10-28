@@ -189,6 +189,25 @@ export function tocha() {
   });
 }
 
+// Tocha apagada (mesmo desenho, sem a chama).
+export function tochaApagada() {
+  return memo("tochaApagada", () => {
+    const pm = new Pixmap(12, 32);
+    const madeira = rgb("#6a4428");
+    for (let y = 12; y <= 30; y++) {
+      pm.set(5, y, clarear(madeira, 0.12));
+      pm.set(6, y, escurecer(madeira, 0.2));
+    }
+    pm.rect(4, 29, 4, 2, escurecer(madeira, 0.25));
+    const ferro = rgb("#4a4048");
+    pm.rect(3, 10, 6, 3, ferro);
+    pm.rect(2, 9, 8, 1, clarear(ferro, 0.2));
+    pm.set(5, 9, rgb("#2a2420"));
+    pm.set(6, 8, rgb("#3a3430"));
+    return { img: pm.contorno(0.55).paraCanvas(), ax: 6, ay: 30 };
+  });
+}
+
 // Desenha uma chama com camadas de cor (fora laranja, meio amarelo, centro claro).
 export function chama(pm, cx, base, larg, alt, q) {
   const cores = [rgb("#d8401e"), rgb("#ff8a2a"), rgb("#ffd25a"), rgb("#fff4c8")];
