@@ -40,6 +40,17 @@ export const DIALOGOS = {
     ],
   },
 
+  // ================= FINAL — a equipe reunida =================
+  reuniao: [
+    { quem: "debora", texto: "Ei, você chegou! A gente estava falando justamente disso: o que é um amigo de verdade?" },
+    { quem: "kenedy", texto: "Amigo de verdade não some quando a coisa aperta." },
+    { quem: "bea", texto: "É quem fica do seu lado mesmo quando você erra." },
+    { quem: "thama", texto: "E te aceita do jeito que você é. Sem fingir." },
+    { quem: "mj", texto: "E faria qualquer coisa por você. Tipo... qualquer coisa mesmo." },
+    { quem: "debora", texto: "A gente conhece um amigo assim. Um amigo que deu tudo pela gente." },
+    { quem: "debora", texto: "Quer descobrir quem é? Vem com a gente!" },
+  ],
+
   // ================= FASE 2 — UMA NOITE EM JERUSALÉM (João 13–15) =================
   ceia: {
     intro: [
@@ -69,6 +80,7 @@ export const DIALOGOS = {
       { quem: "jesus", ref: "João 15:9", texto: "Assim como o Pai me amou, eu também amei vocês. Fiquem no meu amor." },
       { quem: "jesus", ref: "João 15:12", texto: "O meu mandamento é este: amem uns aos outros como eu amei vocês." },
     ],
+    pergunta: [{ quem: "jesus", texto: "Antes, me diz uma coisa: o que faz um amigo de verdade?" }],
     escuro: [{ quem: "jesus", texto: "Está escuro demais para conversar. Acende a lanterna: tem um recado ali na caixa, perto de você." }],
     recado: [
       { quem: "narrador", nome: "Recado", texto: "Para iluminar o jantar, acenda as tochas nesta ordem:" },

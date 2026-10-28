@@ -170,6 +170,19 @@ async function ouvirJesus(jogo) {
   R.jesus.olharPara(j.x, j.y);
   jogo.focar(px(12), px(5.6));
 
+  // Pergunta rápida sobre amizade (só clicar).
+  await jogo.falar(D.pergunta);
+  let ok = false;
+  while (!ok) {
+    ok = await jogo.ui.enigmas.escolha({
+      titulo: "Amigo de verdade",
+      texto: "Seu amigo está passando por um momento difícil. O que um amigo de verdade faz?",
+      opcoes: ["Visualiza e não responde", "Fica do lado dele", "Posta um meme sobre ele"],
+      resposta: "Fica do lado dele",
+      dicaErro: "Hmm... você ia querer isso de um amigo? Tenta de novo!",
+    });
+  }
+
   // A frase do versículo: o coração acende na parede.
   jogo.audio.sfx("simbolo");
   jogo.piscar([255, 150, 160], 1, 0.25);
@@ -187,9 +200,7 @@ async function ouvirJesus(jogo) {
   jogo.audio.sfx("final");
   jogo.piscar([255, 240, 200], 1.4, 0.4);
   await jogo.esperar(1.2);
-  await jogo.ui.fade(true, 1400);
-  jogo.finalizar();
-  await jogo.ui.fade(false, 900);
+  await jogo.carregarSala("patio");
 }
 
 function atualizar(jogo, dt) {

@@ -21,14 +21,14 @@ export async function finalizar(jogo) {
     }
   };
   await esperar(1.2);
-  await escrever("final-linha1", "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos.");
+  await escrever("final-linha1", "Todo mundo precisa de um amigo de verdade.");
   await esperar(0.7);
-  await escrever("final-linha2", "Jesus disse isso. E fez.");
+  await escrever("final-linha2", "Um amigo que fica, que perdoa e que daria a vida por você.");
   await esperar(0.9);
   $("final-titulo").classList.add("visivel");
   jogo.audio.sfx("simbolo");
   await esperar(1);
-  await escrever("final-linha3", "Essa amizade também é para você.");
+  await escrever("final-linha3", "Sexta-feira, dia 30, às 19h30.");
   await esperar(0.6);
   $("btn-final-seguir").classList.add("visivel");
   try {

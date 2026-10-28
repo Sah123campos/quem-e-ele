@@ -1,26 +1,14 @@
-// FASE 1 — A pergunta: o pátio à noite, com a equipe toda.
-// Débora lança a pergunta "qual é a maior prova de amor?". O jogador ouve
-// pelo menos quatro amigos e volta para ela, que leva a história a Jerusalém.
+// FINAL — A equipe reunida no pátio, conversando sobre o amigo de verdade.
+// Cena curta e automática; depois vem a tela final com o convite.
 import { DIALOGOS } from "../dialogos.js";
 import { titulo as original } from "./titulo.js";
 import * as A from "../arte/objetos.js";
-import { px, objeto, npc, braseiro, ambiente, desenharNevoa, conversa } from "./comum.js";
+import { px, objeto, npc, braseiro, ambiente, desenharNevoa, falarComGestos } from "./comum.js";
 
-const D = DIALOGOS.patio;
-const AMIGOS = ["kenedy", "bea", "mj", "thama", "samuel"];
-const NECESSARIAS = 4;
-
+const D = DIALOGOS.reuniao;
 let R = {};
 
-const def = { ...original.def, inicio: { x: 17, y: 13.2, dir: "cima" }, escuridao: 0.68, musica: "titulo" };
-
-const ouvidas = (j) => AMIGOS.filter((id) => j.flag("ouviu." + id)).length;
-
-function atualizarObjetivo(j) {
-  const n = ouvidas(j);
-  if (n >= NECESSARIAS) j.objetivo("Volte e converse com a Débora.");
-  else j.objetivo(`Pergunte para a galera: qual é a maior prova de amor? (${n}/${NECESSARIAS})`);
-}
+const def = { ...original.def, inicio: { x: 17, y: 5.6, dir: "cima" }, escuridao: 0.6, musica: "titulo" };
 
 function montar(jogo, m) {
   R = {};
@@ -28,45 +16,28 @@ function montar(jogo, m) {
   for (const [x, y, q] of [[6.5, 5.2, false], [27.5, 5.2, false], [13, 12.8, true], [21, 12.8, false]]) {
     objeto(m, A.coluna(q), px(x), px(y), { solido: { w: 16, h: 7 } });
   }
-  m.luzes.push({ x: px(17), y: px(8), raio: 160, cor: [70, 130, 210], brilho: 0.14, intensidade: 0.35 });
-
-  R.debora = npc(m, "debora", px(17), px(11.4), {
-    dir: "baixo",
-    interacao: conversa("Conversar", falarDebora),
-  });
-  const lugares = {
-    kenedy: [5, 8.6, "dir"],
-    bea: [9.5, 11.6, "dir"],
-    mj: [29, 8.6, "esq"],
-    thama: [24.5, 11.6, "esq"],
-    samuel: [17, 4.4, "baixo"],
-  };
-  for (const id of AMIGOS) {
-    const [x, y, dir] = lugares[id];
-    npc(m, id, px(x), px(y), {
-      dir,
-      interacao: conversa("Perguntar", async (j) => {
-        if (j.flag("ouviu." + id)) return j.falar(D[id].slice(-1));
-        await j.falar(D[id]);
-        j.flag("ouviu." + id, true);
-        atualizarObjetivo(j);
-      }),
-    });
-  }
-}
-
-async function falarDebora(j) {
-  if (ouvidas(j) < NECESSARIAS) return j.falar(D.debora);
-  j.objetivo("");
-  await j.falar(D.deboraFinal);
-  await j.carregarSala("ceia");
+  m.luzes.push({ x: px(17), y: px(4.5), raio: 120, cor: [255, 160, 90], brilho: 0.2, intensidade: 0.4 });
+  // Roda de amigos em volta do jogador.
+  const roda = [
+    ["debora", 17, 3.5, "baixo"],
+    ["kenedy", 15, 4.1, "dir"],
+    ["bea", 19, 4.1, "esq"],
+    ["thama", 15.2, 5.4, "dir"],
+    ["mj", 18.8, 5.4, "esq"],
+  ];
+  for (const [id, x, y, dir] of roda) R[id] = npc(m, id, px(x), px(y), { dir, gesticula: true });
 }
 
 async function aoEntrar(jogo) {
-  await jogo.ui.cartao("Parte 1", "A pergunta", "uma noite com a galera", 2600);
-  R.debora.olharPara(jogo.jogador.x, jogo.jogador.y);
-  await jogo.falar(D.intro);
-  atualizarObjetivo(jogo);
+  const j = jogo.jogador;
+  await j.andarAte(px(17), px(4.7));
+  for (const p of Object.values(R)) p.olharPara(j.x, j.y);
+  jogo.focar(px(17), px(5));
+  await falarComGestos(jogo, D, R);
+  await jogo.esperar(0.5);
+  await jogo.ui.fade(true, 1400);
+  jogo.finalizar();
+  await jogo.ui.fade(false, 900);
 }
 
 function atualizar(jogo, dt) {
