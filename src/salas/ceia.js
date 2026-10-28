@@ -107,6 +107,19 @@ async function ouvirJesus(jogo) {
   R.jesus.olharPara(j.x, j.y);
   jogo.focar(px(12), px(5.6));
 
+  // Desafio fácil, sem precisar saber nada da Bíblia.
+  await jogo.falar(D.pergunta);
+  let ok = false;
+  while (!ok) {
+    ok = await jogo.ui.enigmas.escolha({
+      titulo: "Amigo de verdade",
+      texto: "Seu amigo está passando por um momento difícil. O que um amigo de verdade faz?",
+      opcoes: ["Visualiza e não responde", "Fica do lado dele", "Posta um meme sobre ele"],
+      resposta: "Fica do lado dele",
+      dicaErro: "Hmm... você ia querer isso de um amigo? Tenta de novo!",
+    });
+  }
+
   // A frase do versículo: o coração acende na parede.
   jogo.audio.sfx("simbolo");
   jogo.piscar([255, 150, 160], 1, 0.25);

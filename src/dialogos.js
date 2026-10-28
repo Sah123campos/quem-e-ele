@@ -69,6 +69,7 @@ export const DIALOGOS = {
       { quem: "jesus", ref: "João 15:9", texto: "Assim como o Pai me amou, eu também amei vocês. Fiquem no meu amor." },
       { quem: "jesus", ref: "João 15:12", texto: "O meu mandamento é este: amem uns aos outros como eu amei vocês." },
     ],
+    pergunta: [{ quem: "jesus", texto: "Antes, me diz uma coisa: o que faz um amigo de verdade?" }],
     versiculo: [{ quem: "jesus", ref: "João 15:13", texto: "Ninguém tem maior amor do que aquele que dá a sua vida pelos seus amigos." }],
     amigos: [
       { quem: "jesus", ref: "João 15:15", texto: "Eu chamo vocês de amigos." },
