@@ -122,3 +122,10 @@ body.toque-ativo .opcao-escolha kbd { display: none; }
 }
 .convite-corpo .btn { margin: 6px 0; padding: 10px 14px; }
 a.btn { text-decoration: none; text-align: center; }
+
+/* nome do jogador na tela inicial */
+.titulo-nome { display: flex; flex-direction: column; gap: 4px; align-items: center; color: var(--ouro); font-size: 15px; }
+.titulo-nome input { width: min(280px, 80vw); font: inherit; font-size: 18px; text-align: center; padding: 8px 10px; background: rgba(11, 8, 18, 0.85); color: var(--texto); border: 2px solid var(--ouro-escuro); -webkit-user-select: text; user-select: text; }
+.titulo-nome input:focus { outline: none; border-color: var(--ouro); }
+.titulo-nome input.falta { border-color: #ff6a6a; animation: tremerNome 0.4s; }
+@keyframes tremerNome { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }

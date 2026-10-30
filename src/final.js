@@ -1,10 +1,12 @@
 // Tela final de "O Maior Amor": a pergunta que ficou e o convite para sexta.
 import { esperar } from "./jogo.js";
 import { CONVITE, MENSAGEM_COMPARTILHAR } from "./config.js";
+import { registrar, nomeSalvo } from "./registro.js";
 
 const $ = (id) => document.getElementById(id);
 
 export async function finalizar(jogo) {
+  registrar(nomeSalvo(), "finalizou");
   jogo.modo = "final";
   jogo.ui.emJogo = false;
   jogo.ui.atualizar();

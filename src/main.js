@@ -5,6 +5,7 @@ import { carregarRetratos } from "./ui/retratos.js";
 import { SALAS } from "./salas/index.js";
 import { finalizar, mostrarConvite, compartilhar } from "./final.js";
 import { DEBUG, SALA_INICIAL } from "./config.js";
+import { registrar, nomeSalvo, CHAVE_NOME } from "./registro.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -83,9 +84,22 @@ function quadro(agora) {
 let comecando = false;
 async function comecar(continuar) {
   if (comecando || jogo.modo !== "titulo") return;
+  const campo = $("nome-jogador");
+  const nome = campo.value.trim();
+  if (!nome) {
+    campo.classList.remove("falta");
+    void campo.offsetWidth;
+    campo.classList.add("falta");
+    campo.focus();
+    return;
+  }
+  try { localStorage.setItem(CHAVE_NOME, nome); } catch { /* ok */ }
+  registrar(nome, "entrou");
   comecando = true;
   await jogo.comecar(continuar);
 }
+$("nome-jogador").value = nomeSalvo();
+$("nome-jogador").addEventListener("keydown", (e) => { if (e.key === "Enter") comecar(false); e.stopPropagation(); });
 $("btn-comecar").addEventListener("click", () => comecar(false));
 $("btn-continuar").addEventListener("click", () => comecar(true));
 $("btn-final-seguir").addEventListener("click", () => mostrarConvite(jogo));
